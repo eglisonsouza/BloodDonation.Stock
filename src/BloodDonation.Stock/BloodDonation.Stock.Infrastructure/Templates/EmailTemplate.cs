@@ -1,4 +1,4 @@
-﻿using BloodDonation.Stock.Core.Models.Entities;
+﻿using BloodDonation.Stock.Core.Models.DTOs;
 using System.Text;
 
 namespace BloodDonation.Stock.Infrastructure.Templates
@@ -7,7 +7,7 @@ namespace BloodDonation.Stock.Infrastructure.Templates
     {
         public const string Subject = "Estoque de Sangue";
 
-        public static string Body(IEnumerable<BloodStock> stock) =>
+        public static string Body(IEnumerable<BloodStockDTO> stock) =>
             $@"
 <html>
 <body>
@@ -29,8 +29,8 @@ namespace BloodDonation.Stock.Infrastructure.Templates
 <p>Equipe de Desenvolvimento</p>
 </html>";
 
-        private static StringBuilder GenerateTable(IEnumerable<BloodStock> stock) => stock.Aggregate(new StringBuilder(), (sb, s) => sb.AppendLine(GenerateLine(s)));
+        private static StringBuilder GenerateTable(IEnumerable<BloodStockDTO> stock) => stock.Aggregate(new StringBuilder(), (sb, s) => sb.AppendLine(GenerateLine(s)));
 
-        private static string GenerateLine(BloodStock stock) => $@"<tr><td>{stock.BloodType}</td><td>{stock.QuantityMl} Ml</td></tr>";
+        private static string GenerateLine(BloodStockDTO stock) => $@"<tr><td>{stock.BloodType}</td><td>{stock.QuantityMl} Ml</td></tr>";
     }
 }
