@@ -1,5 +1,5 @@
 ﻿using BloodDonation.Stock.Core.Models.Args;
-using BloodDonation.Stock.Core.Models.Entities;
+using BloodDonation.Stock.Core.Models.DTOs;
 using BloodDonation.Stock.Core.Models.Ui.Settings;
 using BloodDonation.Stock.Core.Services.Email;
 using BloodDonation.Stock.Infrastructure.Templates;
@@ -10,7 +10,7 @@ namespace BloodDonation.Stock.Infrastructure.Services.Email
     {
         private readonly string SendToEmail = appSettings.Email!.SendTo!;
 
-        public EmailArgs GenerateEmail(IEnumerable<BloodStock> stock)
+        public EmailArgs GenerateEmail(IEnumerable<BloodStockDTO> stock)
         {
             return new EmailArgs(
                                to: SendToEmail,
@@ -18,6 +18,6 @@ namespace BloodDonation.Stock.Infrastructure.Services.Email
                                subject: EmailTemplate.Subject);
         }
 
-        private static string GenerateMessage(IEnumerable<BloodStock> stock) => EmailTemplate.Body(stock);
+        private static string GenerateMessage(IEnumerable<BloodStockDTO> stock) => EmailTemplate.Body(stock);
     }
 }
